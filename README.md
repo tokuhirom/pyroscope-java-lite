@@ -1,6 +1,6 @@
 # pyroscope-java-lite
 
-This is a PoC module.
+This is a **PoC** module. **Don't use this**.
 
 You can take a java sampling like this.
 
