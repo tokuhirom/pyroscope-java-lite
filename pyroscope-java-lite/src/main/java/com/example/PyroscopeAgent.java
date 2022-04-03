@@ -34,7 +34,7 @@ class PyroscopeAgent {
             Duration writeTimeout
     ) {
         this.httpUrl = HttpUrl.parse(url);
-        this.applicationName = applicationName;
+        this.applicationName = applicationName + ".itimer";
         this.pyroscopeAggregator = new PyroscopeAggregator();
         this.sleepIntervalMillis = sleepInterval.toMillis();
         this.uploadIntervalMillis = uploadInterval.toMillis();
@@ -79,7 +79,7 @@ class PyroscopeAgent {
                             .build();
                     Request request = new Request.Builder()
                             .url(url)
-                            .post(RequestBody.create(content, OCTET_STREAM))
+                            .post(RequestBody.create(OCTET_STREAM, content))
                             .build();
                     Response response = this.okhttpClient.newCall(request)
                             .execute();

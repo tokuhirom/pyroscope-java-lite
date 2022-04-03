@@ -1,13 +1,17 @@
 package com.example;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.time.Duration;
 
 // This is sample.
+@SpringBootApplication
 public class PyroscopeSampleApp {
     public static void main(String[] args) throws InterruptedException {
         var agent = new PyroscopeAgent(
                 "http://localhost:4040",
-                "lite",
+                "lite3",
                 Duration.ofMillis(10),
                 Duration.ofSeconds(10),
                 Duration.ofSeconds(1),
@@ -16,6 +20,6 @@ public class PyroscopeSampleApp {
         );
         agent.start();
 
-        Thread.sleep(200 * 1000);
+        SpringApplication.run(PyroscopeSampleApp.class, args);
     }
 }

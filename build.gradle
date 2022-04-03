@@ -1,4 +1,7 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
+    id 'org.springframework.boot' version '2.6.6' apply false
     id 'java'
 }
 
@@ -8,5 +11,15 @@ version '1.0-SNAPSHOT'
 allprojects {
     repositories {
         mavenCentral()
+    }
+}
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+
+    dependencyManagement {
+        imports {
+            mavenBom SpringBootPlugin.BOM_COORDINATES
+        }
     }
 }

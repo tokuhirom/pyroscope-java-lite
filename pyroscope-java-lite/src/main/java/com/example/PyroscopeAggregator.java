@@ -2,7 +2,6 @@ package com.example;
 
 import java.lang.management.ThreadInfo;
 import java.lang.management.ThreadMXBean;
-import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -21,9 +20,22 @@ class PyroscopeAggregator {
 
     public void aggregate() {
         for (ThreadInfo threadInfo : threadMXBean.dumpAllThreads(false, false)) {
-            String key = Arrays.stream(threadInfo.getStackTrace())
-                    .map(it -> it.getClassName() + "." + it.getMethodName())
-                    .collect(java.util.stream.Collectors.joining(";"));
+            Thread.State threadState = threadInfo.getThreadState();
+            if (threadState != Thread.State.RUNNABLE) {
+                continue;
+            }
+
+            StackTraceElement[] traces = threadInfo.getStackTrace();
+            StringBuilder builder = new StringBuilder();
+            for (int i = traces.length - 1; i >= 0; i--) {
+                builder.append(traces[i].getClassName());
+                builder.append(".");
+                builder.append(traces[i].getMethodName());
+                if (i != 0) {
+                    builder.append(";");
+                }
+            }
+            String key = builder.toString();
             result.compute(key, (s, i) -> i == null ? 1 : i + 1);
         }
     }
