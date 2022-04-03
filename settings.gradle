@@ -1,2 +1,4 @@
 rootProject.name = 'pyroscope-java-lite'
 
+include("pyroscope-java-lite")
+include("sample")
