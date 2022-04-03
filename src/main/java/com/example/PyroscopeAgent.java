@@ -22,7 +22,7 @@ class PyroscopeAgent {
     private final OkHttpClient okhttpClient;
     private static final MediaType OCTET_STREAM = MediaType.parse("application/octet-stream");
 
-    private static Logger logger = LoggerFactory.getLogger(PyroscopeAgent.class);
+    private static final Logger logger = LoggerFactory.getLogger(PyroscopeAgent.class);
 
     public PyroscopeAgent(
             String url,
